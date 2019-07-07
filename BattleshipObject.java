@@ -623,8 +623,24 @@ public class BattleshipObject extends JFrame
         shipFont = new Font("Arial", Font.PLAIN, 15);
         Font endFont = new Font("Times New Roman", Font.BOLD, 20);
         g.setFont(shipFont);
-        g.setColor(background);
-        g.fillRect(0,0,1200,600);
+        if(interfEnemy[0][0].getHasWon() == true || interfPlayer[0][0].getHasWon() == true)
+        {
+            if(interfEnemy[0][0].getHasWon() == true)
+            {
+                g.setColor(Color.RED);
+                g.fillRect(0,0,1200,600);
+            }
+            else
+            {
+                g.setColor(Color.GREEN);
+                g.fillRect(0,0,1200,600);
+            }
+        }
+        else
+        {
+            g.setColor(background);
+            g.fillRect(0,0,1200,600);
+        }
         for(int i = 0; i < interfPlayer.length; i++ )
         {
             for(int j = 0; j < interfPlayer[i].length; j++)
@@ -634,16 +650,12 @@ public class BattleshipObject extends JFrame
                     g.setFont(endFont);
                     if(interfEnemy[0][0].getHasWon() == true)
                     {
-                        g.setColor(Color.RED);
-                        g.fillRect(0,0,1200,600);
                         g.setColor(black);
                         g.drawString("The CPU has won! ",477,575);
                         
                     }
                     else
                     {
-                        g.setColor(Color.GREEN);
-                        g.fillRect(0,0,1200,600);
                         g.setColor(black);
                         g.drawString("You have won! ",477,575);
                     }
