@@ -5,6 +5,7 @@ import javax.swing.*;
 
 public class BattleshipObject extends JFrame
 {
+    private static final long serialVersionUID = 1L;
     public static showShips[][] interfPlayer = new showShips[10][10];
     public static showShips[][] interfEnemy = new showShips[10][10];
     public static void main (String[] args) throws InterruptedException
@@ -62,6 +63,7 @@ public class BattleshipObject extends JFrame
         gui.setSize(1200,600);
         gui.setVisible(true);
         gui.setResizable(false);
+        gui.setTitle("Battleship");
         for(int main = 0; main < player.length; main++) //main loop
         {
             gui.repaint();
@@ -512,6 +514,7 @@ public class BattleshipObject extends JFrame
                 player[1].setField(y, x, 0);
                 interfEnemy[y][x].setRGB(255,100,120);
                 interfEnemy[y][x].setTypeOfShip("HIT");
+                gui.repaint();
                 if(player[1].getPiecesAlive() == 0)
                 {
                     break;
@@ -523,8 +526,8 @@ public class BattleshipObject extends JFrame
                 player[1].setPlayingField(y, x, "MISS");
                 interfEnemy[y][x].setRGB(200,100,120);
                 interfEnemy[y][x].setTypeOfShip("MISS");
+                gui.repaint();
             }
-            gui.repaint();
             System.out.println("///////////////////////////////////////////////////////");
             System.out.println("///////////////////YOUR BOARD/////////////////////////");
             System.out.println("///////////////////YOUR BOARD/////////////////////////");
@@ -545,6 +548,7 @@ public class BattleshipObject extends JFrame
                 player[0].setField(y, x, 0);
                 interfPlayer[y][x].setRGB(255,100,120);
                 interfPlayer[y][x].setTypeOfShip("HIT");
+                gui.repaint();
                 if(player[0].getPiecesAlive() == 0)
                 {
                     break;
@@ -557,17 +561,20 @@ public class BattleshipObject extends JFrame
                 interfPlayer[y][x].setRGB(200,100,120);
                 interfPlayer[y][x].setShipPresent(true);
                 interfPlayer[y][x].setTypeOfShip("MISS");
+                gui.repaint();
             }
-            gui.repaint();
         }
         if(player[0].getPiecesAlive() == 0)
         {
             System.out.println("The CPU has won.");
+            interfEnemy[0][0].setHasWon(true);
         }
         else
         {
             System.out.println("You won!");
+            interfPlayer[0][0].setHasWon(true);
         }
+        gui.repaint();
         scan.close();
     }
     public static int[] convert(int input)
@@ -614,6 +621,7 @@ public class BattleshipObject extends JFrame
         Color black = new Color(0,0,0);
         Font shipFont;
         shipFont = new Font("Arial", Font.PLAIN, 15);
+        Font endFont = new Font("Times New Roman", Font.BOLD, 20);
         g.setFont(shipFont);
         g.setColor(background);
         g.fillRect(0,0,1200,600);
@@ -621,6 +629,26 @@ public class BattleshipObject extends JFrame
         {
             for(int j = 0; j < interfPlayer[i].length; j++)
             {
+                if(interfEnemy[0][0].getHasWon() == true || interfPlayer[0][0].getHasWon() == true)
+                {
+                    g.setFont(endFont);
+                    if(interfEnemy[0][0].getHasWon() == true)
+                    {
+                        g.setColor(Color.RED);
+                        g.fillRect(0,0,1200,600);
+                        g.setColor(black);
+                        g.drawString("The CPU has won! ",477,575);
+                        
+                    }
+                    else
+                    {
+                        g.setColor(Color.GREEN);
+                        g.fillRect(0,0,1200,600);
+                        g.setColor(black);
+                        g.drawString("You have won! ",477,575);
+                    }
+                    g.setFont(shipFont);
+                }
                 fieldColor = new Color(interfPlayer[i][j].getR(), interfPlayer[i][j].getG(), interfPlayer[i][j].getB());
                 g.setColor(fieldColor);
                 g.fillRect(interfPlayer[i][j].getX(),interfPlayer[i][j].getY(), interfPlayer[i][j].getWidth(), interfPlayer[i][j].getHeight());
@@ -655,6 +683,7 @@ class showShips
 {
     //int yFactor = 0;
     //int xFactor = 0;
+    boolean hasWon = false;
     int x = 0;
     int y = 0;
     final int width = 50;
@@ -665,6 +694,14 @@ class showShips
     int b = 255;
     boolean shipPresent = false;
     String typeOfShip = "";
+    boolean getHasWon()
+    {
+        return hasWon;
+    }
+    void setHasWon(boolean hasWon)
+    {
+        this.hasWon = hasWon;
+    }
     boolean getShipPresent()
     {
         return shipPresent;
