@@ -3,7 +3,7 @@ import java.util.Random;
 import java.awt.*;
 import javax.swing.*;
 
-public class BattleshipObject extends JFrame
+public class Battleship extends JFrame
 {
     private static final long serialVersionUID = 1L;
     public static showShips[][] interfPlayer = new showShips[10][10];
