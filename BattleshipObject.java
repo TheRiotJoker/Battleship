@@ -22,13 +22,14 @@ public class BattleshipObject extends JFrame
             player[i].initShipsToPlace();
             player[i].initPlayingField();
             player[i].initField();
+            player[i].initializeShipHp();
         }
         for(int i = 0; i < interfPlayer.length; i++)
         {
             for(int j = 0; j < interfPlayer[i].length; j++)
             {
                 interfPlayer[i][j] = new showShips();
-                interfPlayer[i][j].setId(counter);
+                interfPlayer[i][j].setDisplayText(""+counter);
                 counter++;
                 interfPlayer[i][j].setX(x);
                 x = x+interfPlayer[i][j].getWidth();
@@ -46,7 +47,7 @@ public class BattleshipObject extends JFrame
             for(int j = 0; j < interfEnemy[i].length; j++)
             {
                 interfEnemy[i][j] = new showShips();
-                interfEnemy[i][j].setId(counter);
+                interfEnemy[i][j].setDisplayText(""+counter);
                 counter++;
                 interfEnemy[i][j].setX(x);
                 x = x+interfEnemy[i][j].getWidth();
@@ -64,6 +65,7 @@ public class BattleshipObject extends JFrame
         gui.setVisible(true);
         gui.setResizable(false);
         gui.setTitle("Battleship");
+        gui.setDefaultCloseOperation(EXIT_ON_CLOSE);
         for(int main = 0; main < player.length; main++) //main loop
         {
             gui.repaint();
@@ -91,7 +93,7 @@ public class BattleshipObject extends JFrame
                     do
                     {
                         System.out.println("Please input your desired position: ");
-                        player[main].setInput(scan.nextInt());
+                        player[main].setInput(input(scan.next()));
                         if(player[main].getInput() < 0 || player[main].getInput() >= 100)
                         {
                             System.out.println("Invalid input.");
@@ -129,18 +131,31 @@ public class BattleshipObject extends JFrame
                                 player[main].setField(y, x+2, 55555);
                                 player[main].setField(y, x+3, 55555);
                                 player[main].setField(y, x+4, 55555);
+                                if(main == 1)
+                                {
+                                    interfEnemy[y][x].setTypeOfShip("C5");
+                                    interfEnemy[y][x+1].setTypeOfShip("C5");
+                                    interfEnemy[y][x+2].setTypeOfShip("C5");
+                                    interfEnemy[y][x+3].setTypeOfShip("C5");
+                                    interfEnemy[y][x+4].setTypeOfShip("C5");
+                                }
                                 if(main == 0)
                                 {
+                                    interfPlayer[y][x].setTypeOfShip("C5");
+                                    interfPlayer[y][x+1].setTypeOfShip("C5");
+                                    interfPlayer[y][x+2].setTypeOfShip("C5");
+                                    interfPlayer[y][x+3].setTypeOfShip("C5");
+                                    interfPlayer[y][x+4].setTypeOfShip("C5");
                                     interfPlayer[y][x].setRGB(99,245,66);
                                     interfPlayer[y][x+1].setRGB(99,245,66);
                                     interfPlayer[y][x+2].setRGB(99,245,66);
                                     interfPlayer[y][x+3].setRGB(99,245,66);
                                     interfPlayer[y][x+4].setRGB(99,245,66);
-                                    interfPlayer[y][x].setTypeOfShip("_C5_");
-                                    interfPlayer[y][x+1].setTypeOfShip("_C5_");
-                                    interfPlayer[y][x+2].setTypeOfShip("_C5_");
-                                    interfPlayer[y][x+3].setTypeOfShip("_C5_");
-                                    interfPlayer[y][x+4].setTypeOfShip("_C5_");
+                                    interfPlayer[y][x].setDisplayText("_C5_");
+                                    interfPlayer[y][x+1].setDisplayText("_C5_");
+                                    interfPlayer[y][x+2].setDisplayText("_C5_");
+                                    interfPlayer[y][x+3].setDisplayText("_C5_");
+                                    interfPlayer[y][x+4].setDisplayText("_C5_");
                                     interfPlayer[y][x].setShipPresent(true);
                                     interfPlayer[y][x+1].setShipPresent(true);
                                     interfPlayer[y][x+2].setShipPresent(true);
@@ -179,18 +194,31 @@ public class BattleshipObject extends JFrame
                                     player[main].setField(y+2, x, 55555);
                                     player[main].setField(y+3, x, 55555);
                                     player[main].setField(y+4, x, 55555);
+                                    if(main == 1)
+                                    {
+                                        interfEnemy[y][x].setTypeOfShip("C5");
+                                        interfEnemy[y+1][x].setTypeOfShip("C5");
+                                        interfEnemy[y+2][x].setTypeOfShip("C5");
+                                        interfEnemy[y+3][x].setTypeOfShip("C5");
+                                        interfEnemy[y+4][x].setTypeOfShip("C5");
+                                    }
                                     if(main == 0)
                                     {
+                                        interfPlayer[y][x].setTypeOfShip("C5");
+                                        interfPlayer[y+1][x].setTypeOfShip("C5");
+                                        interfPlayer[y+2][x].setTypeOfShip("C5");
+                                        interfPlayer[y+3][x].setTypeOfShip("C5");
+                                        interfPlayer[y+4][x].setTypeOfShip("C5");
                                         interfPlayer[y][x].setRGB(99,245,66);
                                         interfPlayer[y+1][x].setRGB(99,245,66);
                                         interfPlayer[y+2][x].setRGB(99,245,66);
                                         interfPlayer[y+3][x].setRGB(99,245,66);
                                         interfPlayer[y+4][x].setRGB(99,245,66);
-                                        interfPlayer[y][x].setTypeOfShip("_C5_");
-                                        interfPlayer[y+1][x].setTypeOfShip("_C5_");
-                                        interfPlayer[y+2][x].setTypeOfShip("_C5_");
-                                        interfPlayer[y+3][x].setTypeOfShip("_C5_");
-                                        interfPlayer[y+4][x].setTypeOfShip("_C5_");
+                                        interfPlayer[y][x].setDisplayText("_C5_");
+                                        interfPlayer[y+1][x].setDisplayText("_C5_");
+                                        interfPlayer[y+2][x].setDisplayText("_C5_");
+                                        interfPlayer[y+3][x].setDisplayText("_C5_");
+                                        interfPlayer[y+4][x].setDisplayText("_C5_");
                                         interfPlayer[y][x].setShipPresent(true);
                                         interfPlayer[y+1][x].setShipPresent(true);
                                         interfPlayer[y+2][x].setShipPresent(true);
@@ -233,16 +261,27 @@ public class BattleshipObject extends JFrame
                                 player[main].setField(y, x+1, 4444);
                                 player[main].setField(y, x+2, 4444);
                                 player[main].setField(y, x+3, 4444);
+                                if(main == 1)
+                                {
+                                    interfEnemy[y][x].setTypeOfShip("B4");
+                                    interfEnemy[y][x+1].setTypeOfShip("B4");
+                                    interfEnemy[y][x+2].setTypeOfShip("B4");
+                                    interfEnemy[y][x+3].setTypeOfShip("B4");
+                                }
                                 if(main == 0)
                                 {
+                                    interfPlayer[y][x].setTypeOfShip("B4");
+                                    interfPlayer[y][x+1].setTypeOfShip("B4");
+                                    interfPlayer[y][x+2].setTypeOfShip("B4");
+                                    interfPlayer[y][x+3].setTypeOfShip("B4");
                                     interfPlayer[y][x].setRGB(99,245,66);
                                     interfPlayer[y][x+1].setRGB(99,245,66);
                                     interfPlayer[y][x+2].setRGB(99,245,66);
                                     interfPlayer[y][x+3].setRGB(99,245,66);
-                                    interfPlayer[y][x].setTypeOfShip("_B4_");
-                                    interfPlayer[y][x+1].setTypeOfShip("_B4_");
-                                    interfPlayer[y][x+2].setTypeOfShip("_B4_");
-                                    interfPlayer[y][x+3].setTypeOfShip("_B4_");
+                                    interfPlayer[y][x].setDisplayText("_B4_");
+                                    interfPlayer[y][x+1].setDisplayText("_B4_");
+                                    interfPlayer[y][x+2].setDisplayText("_B4_");
+                                    interfPlayer[y][x+3].setDisplayText("_B4_");
                                     interfPlayer[y][x].setShipPresent(true);
                                     interfPlayer[y][x+1].setShipPresent(true);
                                     interfPlayer[y][x+2].setShipPresent(true);
@@ -278,16 +317,27 @@ public class BattleshipObject extends JFrame
                                     player[main].setField(y+1, x, 4444);
                                     player[main].setField(y+2, x, 4444);
                                     player[main].setField(y+3, x, 4444);
+                                    if(main == 1)
+                                    {
+                                        interfEnemy[y][x].setTypeOfShip("B4");
+                                        interfEnemy[y+1][x].setTypeOfShip("B4");
+                                        interfEnemy[y+2][x].setTypeOfShip("B4");
+                                        interfEnemy[y+3][x].setTypeOfShip("B4");
+                                    }   
                                     if(main == 0)
                                     {
+                                        interfPlayer[y][x].setTypeOfShip("B4");
+                                        interfPlayer[y+1][x].setTypeOfShip("B4");
+                                        interfPlayer[y+2][x].setTypeOfShip("B4");
+                                        interfPlayer[y+3][x].setTypeOfShip("B4");
                                         interfPlayer[y][x].setRGB(99,245,66);
                                         interfPlayer[y+1][x].setRGB(99,245,66);
                                         interfPlayer[y+2][x].setRGB(99,245,66);
                                         interfPlayer[y+3][x].setRGB(99,245,66);
-                                        interfPlayer[y][x].setTypeOfShip("_B4_");
-                                        interfPlayer[y+1][x].setTypeOfShip("_B4_");
-                                        interfPlayer[y+2][x].setTypeOfShip("_B4_");
-                                        interfPlayer[y+3][x].setTypeOfShip("_B4_");
+                                        interfPlayer[y][x].setDisplayText("_B4_");
+                                        interfPlayer[y+1][x].setDisplayText("_B4_");
+                                        interfPlayer[y+2][x].setDisplayText("_B4_");
+                                        interfPlayer[y+3][x].setDisplayText("_B4_");
                                         interfPlayer[y][x].setShipPresent(true);
                                         interfPlayer[y+1][x].setShipPresent(true);
                                         interfPlayer[y+2][x].setShipPresent(true);
@@ -324,17 +374,56 @@ public class BattleshipObject extends JFrame
                             if(player[main].getField()[y][x] == 0 && player[main].getField()[y][x+1] == 0 && player[main].getField()[y][x+2] == 0)
                             {
                                 player[main].setShipsToPlace(3, player[main].getShipsToPlace()[3]-1);
-                                player[main].setField(y, x, 333);
-                                player[main].setField(y, x+1, 333);
-                                player[main].setField(y, x+2, 333);
+                                if(main == 1)
+                                {
+                                    if(player[main].getCPlaced() == false)
+                                    {
+                                        player[main].setField(y, x, 333);
+                                        player[main].setField(y, x+1, 333);
+                                        player[main].setField(y, x+2, 333);
+                                        interfEnemy[y][x].setTypeOfShip("C3");
+                                        interfEnemy[y][x+1].setTypeOfShip("C3");
+                                        interfEnemy[y][x+2].setTypeOfShip("C3");
+                                        player[1].setCPlaced(true);
+                                    }
+                                    else
+                                    {
+                                        player[main].setField(y, x, 3333);
+                                        player[main].setField(y, x+1, 3333);
+                                        player[main].setField(y, x+2, 3333);
+                                        interfEnemy[y][x].setTypeOfShip("S3");
+                                        interfEnemy[y][x+1].setTypeOfShip("S3");
+                                        interfEnemy[y][x+2].setTypeOfShip("S3");
+                                    }
+                                }
                                 if(main == 0)
                                 {
+                                    if(player[main].getCPlaced() == false)
+                                    {
+                                        player[main].setField(y, x, 333);
+                                        player[main].setField(y, x+1, 333);
+                                        player[main].setField(y, x+2, 333);
+                                        interfPlayer[y][x].setTypeOfShip("C3");
+                                        interfPlayer[y][x+1].setTypeOfShip("C3");
+                                        interfPlayer[y][x+2].setTypeOfShip("C3");
+                                        player[main].setCPlaced(true);
+                                        
+                                    }
+                                    else
+                                    {
+                                        player[main].setField(y, x, 3333);
+                                        player[main].setField(y, x+1, 3333);
+                                        player[main].setField(y, x+2, 3333);
+                                        interfPlayer[y][x].setTypeOfShip("S3");
+                                        interfPlayer[y][x+1].setTypeOfShip("S3");
+                                        interfPlayer[y][x+2].setTypeOfShip("S3");
+                                    }
                                     interfPlayer[y][x].setRGB(99,245,66);
                                     interfPlayer[y][x+1].setRGB(99,245,66);
                                     interfPlayer[y][x+2].setRGB(99,245,66);
-                                    interfPlayer[y][x].setTypeOfShip("_C3_");
-                                    interfPlayer[y][x+1].setTypeOfShip("_C3_");
-                                    interfPlayer[y][x+2].setTypeOfShip("_C3_");
+                                    interfPlayer[y][x].setDisplayText("_C3_");
+                                    interfPlayer[y][x+1].setDisplayText("_C3_");
+                                    interfPlayer[y][x+2].setDisplayText("_C3_");
                                     interfPlayer[y][x].setShipPresent(true);
                                     interfPlayer[y][x+1].setShipPresent(true);
                                     interfPlayer[y][x+2].setShipPresent(true);
@@ -364,17 +453,55 @@ public class BattleshipObject extends JFrame
                                 if(player[main].getField()[y][x] == 0 && player[main].getField()[y+1][x] == 0 && player[main].getField()[y+2][x] == 0)
                                 {
                                     player[main].setShipsToPlace(3, player[main].getShipsToPlace()[3]-1);
-                                    player[main].setField(y, x, 333);
-                                    player[main].setField(y+1, x, 333);
-                                    player[main].setField(y+2, x, 333);
+                                    if(main == 1)
+                                    {
+                                        if(player[main].getCPlaced() == false)
+                                        {
+                                            player[main].setField(y, x, 333);
+                                            player[main].setField(y+1, x, 333);
+                                            player[main].setField(y+2, x, 333);
+                                            interfEnemy[y][x].setTypeOfShip("C3");
+                                            interfEnemy[y+1][x].setTypeOfShip("C3");
+                                            interfEnemy[y+2][x].setTypeOfShip("C3");
+                                            player[1].setCPlaced(true);
+                                        }
+                                        else
+                                        {
+                                            player[main].setField(y, x, 3333);
+                                            player[main].setField(y+1, x, 3333);
+                                            player[main].setField(y+2, x, 3333);
+                                            interfEnemy[y][x].setTypeOfShip("S3");
+                                            interfEnemy[y+1][x].setTypeOfShip("S3");
+                                            interfEnemy[y+2][x].setTypeOfShip("S3");
+                                        }
+                                    }
                                     if(main == 0)
                                     {
+                                        if(player[main].getCPlaced() == false)
+                                        {
+                                            player[main].setField(y, x, 333);
+                                            player[main].setField(y+1, x, 333);
+                                            player[main].setField(y+2, x, 333);
+                                            interfPlayer[y][x].setTypeOfShip("C3");
+                                            interfPlayer[y+1][x].setTypeOfShip("C3");
+                                            interfPlayer[y+2][x].setTypeOfShip("C3");
+                                            player[0].setCPlaced(true);
+                                        }
+                                        else
+                                        {
+                                            player[main].setField(y, x, 3333);
+                                            player[main].setField(y+1, x, 3333);
+                                            player[main].setField(y+2, x, 3333);
+                                            interfPlayer[y][x].setTypeOfShip("S3");
+                                            interfPlayer[y+1][x].setTypeOfShip("S3");
+                                            interfPlayer[y+2][x].setTypeOfShip("S3");
+                                        }
                                         interfPlayer[y][x].setRGB(99,245,66);
                                         interfPlayer[y+1][x].setRGB(99,245,66);
                                         interfPlayer[y+2][x].setRGB(99,245,66);
-                                        interfPlayer[y][x].setTypeOfShip("_C3_");
-                                        interfPlayer[y+1][x].setTypeOfShip("_C3_");
-                                        interfPlayer[y+2][x].setTypeOfShip("_C3_");
+                                        interfPlayer[y][x].setDisplayText("_C3_");
+                                        interfPlayer[y+1][x].setDisplayText("_C3_");
+                                        interfPlayer[y+2][x].setDisplayText("_C3_");
                                         interfPlayer[y][x].setShipPresent(true);
                                         interfPlayer[y+1][x].setShipPresent(true);
                                         interfPlayer[y+2][x].setShipPresent(true);
@@ -411,12 +538,19 @@ public class BattleshipObject extends JFrame
                                 player[main].setShipsToPlace(2, player[main].getShipsToPlace()[2]-1);
                                 player[main].setField(y, x, 22);
                                 player[main].setField(y, x+1, 22);
+                                if(main == 1)
+                                {
+                                    interfEnemy[y][x].setTypeOfShip("D2");
+                                    interfEnemy[y][x+1].setTypeOfShip("D2");
+                                }
                                 if(main == 0)
                                 {
+                                    interfPlayer[y][x].setTypeOfShip("D2");
+                                    interfPlayer[y][x+1].setTypeOfShip("D2");
                                     interfPlayer[y][x].setRGB(99,245,66);
                                     interfPlayer[y][x+1].setRGB(99,245,66);
-                                    interfPlayer[y][x].setTypeOfShip("_D2_");
-                                    interfPlayer[y][x+1].setTypeOfShip("_D2_");
+                                    interfPlayer[y][x].setDisplayText("_D2_");
+                                    interfPlayer[y][x+1].setDisplayText("_D2_");
                                     interfPlayer[y][x].setShipPresent(true);
                                     interfPlayer[y][x+1].setShipPresent(true);
                                     gui.repaint();
@@ -447,12 +581,19 @@ public class BattleshipObject extends JFrame
                                     player[main].setShipsToPlace(2, player[main].getShipsToPlace()[2]-1);
                                     player[main].setField(y, x, 22);
                                     player[main].setField(y+1, x, 22);
+                                    if(main == 1)
+                                    {
+                                        interfEnemy[y][x].setTypeOfShip("D2");
+                                        interfEnemy[y+1][x].setTypeOfShip("D2");
+                                    }
                                     if(main == 0)
                                     {
+                                        interfPlayer[y][x].setTypeOfShip("D2");
+                                        interfPlayer[y+1][x].setTypeOfShip("D2");
                                         interfPlayer[y][x].setRGB(99,245,66);
                                         interfPlayer[y+1][x].setRGB(99,245,66);
-                                        interfPlayer[y][x].setTypeOfShip("_D2_");
-                                        interfPlayer[y+1][x].setTypeOfShip("_D2_");
+                                        interfPlayer[y][x].setDisplayText("_D2_");
+                                        interfPlayer[y+1][x].setDisplayText("_D2_");
                                         interfPlayer[y][x].setShipPresent(true);
                                         interfPlayer[y+1][x].setShipPresent(true);
                                         gui.repaint();
@@ -493,7 +634,21 @@ public class BattleshipObject extends JFrame
             System.out.print("It's your turn to shoot: ");
             do
             {
-                player[0].setShoot(scan.nextInt());
+                do
+                {
+                    player[0].setShoot(input(scan.next()));
+                    if(player[0].getShoot() >= 100 || player[0].getShoot() < 0)
+                    {
+                        if(player[0].getShoot() >= 100)
+                        {
+                            System.out.println("Invalid input. Can't be higher than or equal to 100");
+                        }
+                        else
+                        {
+                            System.out.println("Invalid input. Can't be lower than 0");
+                        }
+                    }
+                }while(player[0].getShoot() >= 100 || player[0].getShoot() < 0);
                 y = convert(player[0].getShoot())[0];
                 x = convert(player[0].getShoot())[1];
                 if(player[1].getPlayingField()[y][x].equalsIgnoreCase("HIT") || player[1].getPlayingField()[y][x].equalsIgnoreCase("MISS"))
@@ -504,16 +659,104 @@ public class BattleshipObject extends JFrame
                 {
                     System.out.println("Invalid input.");
                 }
-            }while(player[1].getPlayingField()[y][x].equalsIgnoreCase("HIT") || player[1].getPlayingField()[y][x].equalsIgnoreCase("MISS") || player[0].getShoot() < 0 || player[0].getShoot() >= 100);
+            }while(player[1].getPlayingField()[y][x].equalsIgnoreCase("HIT") || player[1].getPlayingField()[y][x].equalsIgnoreCase("MISS"));
             interfEnemy[y][x].setShipPresent(false);
             if(player[1].getField()[y][x] > 0)
             {
                 System.out.println("Direct hit!");
                 player[1].setPiecesAlive(player[1].getPiecesAlive()-1);
                 player[1].setPlayingField(y, x, "HIT");
-                player[1].setField(y, x, 0);
                 interfEnemy[y][x].setRGB(255,100,120);
-                interfEnemy[y][x].setTypeOfShip("HIT");
+                interfEnemy[y][x].setDisplayText("HIT");
+                switch(player[1].getField()[y][x])
+                {
+                    case 55555:
+                    player[1].decrementShipHp(5);
+                    if(player[1].getShipHp(5) == 0)
+                    {
+                        for(int i = 0; i < interfEnemy.length; i++)
+                        {
+                            for(int j = 0; j < interfEnemy[i].length; j++)
+                            {
+                                if(interfEnemy[i][j].getTypeOfShip().equalsIgnoreCase("C5"))
+                                {
+                                    interfEnemy[i][j].setRGB(180,40,40);
+                                    interfEnemy[i][j].setDisplayText("");
+                                }
+                            }
+                        }
+                    }
+                    break;
+                    case 4444:
+                    player[1].decrementShipHp(4);
+                    if(player[1].getShipHp(4) == 0)
+                    {
+                        for(int i = 0; i < interfEnemy.length; i++)
+                        {
+                            for(int j = 0; j < interfEnemy[i].length; j++)
+                            {
+                                if(interfEnemy[i][j].getTypeOfShip().equalsIgnoreCase("B4"))
+                                {
+                                    interfEnemy[i][j].setRGB(180,40,40);
+                                    interfEnemy[i][j].setDisplayText("");
+                                }
+                            }
+                        }
+                    }
+                    break;
+                    case 3333:
+                    player[1].decrementShipHp(3);
+                    if(player[1].getShipHp(3) == 0)
+                    {
+                        for(int i = 0; i < interfEnemy.length; i++)
+                        {
+                            for(int j = 0; j < interfEnemy[i].length; j++)
+                            {
+                                if(interfEnemy[i][j].getTypeOfShip().equalsIgnoreCase("S3"))
+                                {
+                                    interfEnemy[i][j].setRGB(180,40,40);
+                                    interfEnemy[i][j].setDisplayText("");
+                                }
+                            }
+                        }
+                    }
+                    break;
+                    case 333:
+                    player[1].decrementShipHp(2);
+                    if(player[1].getShipHp(2) == 0)
+                    {
+                        for(int i = 0; i < interfEnemy.length; i++)
+                        {
+                            for(int j = 0; j < interfEnemy[i].length; j++)
+                            {
+                                if(interfEnemy[i][j].getTypeOfShip().equalsIgnoreCase("C3"))
+                                {
+                                    interfEnemy[i][j].setRGB(180,40,40);
+                                    interfEnemy[i][j].setDisplayText("");
+                                }
+                            }
+                        }
+                    }
+                    break;
+                    case 22:
+                    player[1].decrementShipHp(1);
+                    if(player[1].getShipHp(1) == 0)
+                    {
+                        for(int i = 0; i < interfEnemy.length; i++)
+                        {
+                            for(int j = 0; j < interfEnemy[i].length; j++)
+                            {
+                                if(interfEnemy[i][j].getTypeOfShip().equalsIgnoreCase("D2"))
+                                {
+                                    interfEnemy[i][j].setRGB(180,40,40);
+                                    interfEnemy[i][j].setDisplayText("");
+                                }
+                            }
+                        }
+                    }
+                    break;
+                }
+                player[1].setField(y, x, 0);
                 gui.repaint();
                 if(player[1].getPiecesAlive() == 0)
                 {
@@ -525,7 +768,7 @@ public class BattleshipObject extends JFrame
                 System.out.println("Miss.");
                 player[1].setPlayingField(y, x, "MISS");
                 interfEnemy[y][x].setRGB(200,100,120);
-                interfEnemy[y][x].setTypeOfShip("MISS");
+                interfEnemy[y][x].setDisplayText("MISS");
                 gui.repaint();
             }
             System.out.println("///////////////////////////////////////////////////////");
@@ -545,9 +788,98 @@ public class BattleshipObject extends JFrame
                 System.out.println("We've been hit!");
                 player[0].setPiecesAlive(player[0].getPiecesAlive()-1);
                 player[0].setPlayingField(y, x, "HIT");
-                player[0].setField(y, x, 0);
                 interfPlayer[y][x].setRGB(255,100,120);
-                interfPlayer[y][x].setTypeOfShip("HIT");
+                interfPlayer[y][x].setDisplayText("HIT");
+                switch(player[0].getField()[y][x])
+                {
+                    case 55555:
+                    player[0].decrementShipHp(5);
+                    if(player[0].getShipHp(5) == 0)
+                    {
+                        for(int i = 0; i < interfPlayer.length; i++)
+                        {
+                            for(int j = 0; j < interfPlayer[i].length; j++)
+                            {
+                                if(interfPlayer[i][j].getTypeOfShip().equalsIgnoreCase("C5"))
+                                {
+                                    interfPlayer[i][j].setRGB(180,40,40);
+                                    interfPlayer[i][j].setDisplayText("");
+                                }
+                            }
+                        }
+                    }
+                    break;
+                    case 4444:
+                    player[0].decrementShipHp(4);
+                    if(player[0].getShipHp(4) == 0)
+                    {
+                        for(int i = 0; i < interfPlayer.length; i++)
+                        {
+                            for(int j = 0; j < interfPlayer[i].length; j++)
+                            {
+                                if(interfPlayer[i][j].getTypeOfShip().equalsIgnoreCase("B4"))
+                                {
+                                    interfPlayer[i][j].setRGB(180,40,40);
+                                    interfPlayer[i][j].setDisplayText("");
+                                }
+                            }
+                        }
+                    }
+                    break;
+                    case 3333:
+                    player[0].decrementShipHp(3);
+                    if(player[0].getShipHp(3) == 0)
+                    {
+                        for(int i = 0; i < interfPlayer.length; i++)
+                        {
+                            for(int j = 0; j < interfPlayer[i].length; j++)
+                            {
+                                if(interfPlayer[i][j].getTypeOfShip().equalsIgnoreCase("S3"))
+                                {
+                                    interfPlayer[i][j].setRGB(180,40,40);
+                                    interfPlayer[i][j].setDisplayText("");
+                                }
+                            }
+                        }
+                    }
+                    break;
+                    case 333:
+                    player[0].decrementShipHp(2);
+                    if(player[0].getShipHp(2) == 0)
+                    {
+                        for(int i = 0; i < interfPlayer.length; i++)
+                        {
+                            for(int j = 0; j < interfPlayer[i].length; j++)
+                            {
+                                if(interfPlayer[i][j].getTypeOfShip().equalsIgnoreCase("C3"))
+                                {
+                                    interfPlayer[i][j].setRGB(180,40,40);
+                                    interfPlayer[i][j].setDisplayText("");
+                                    interfPlayer[i][j].setTypeOfShip("");
+                                }
+                            }
+                        }
+                    }
+                    break;
+                    case 22:
+                    player[0].decrementShipHp(1);
+                    if(player[0].getShipHp(1) == 0)
+                    {
+                        for(int i = 0; i < interfPlayer.length; i++)
+                        {
+                            for(int j = 0; j < interfPlayer[i].length; j++)
+                            {
+                                if(interfPlayer[i][j].getTypeOfShip().equalsIgnoreCase("D2"))
+                                {
+                                    interfPlayer[i][j].setRGB(180,40,40);
+                                    interfPlayer[i][j].setDisplayText("");
+                                }
+                            }
+                        }
+                    }
+                    break;
+                }
+                player[0].setField(y, x, 0);
                 gui.repaint();
                 if(player[0].getPiecesAlive() == 0)
                 {
@@ -560,7 +892,7 @@ public class BattleshipObject extends JFrame
                 player[0].setPlayingField(y, x, "MISS");
                 interfPlayer[y][x].setRGB(200,100,120);
                 interfPlayer[y][x].setShipPresent(true);
-                interfPlayer[y][x].setTypeOfShip("MISS");
+                interfPlayer[y][x].setDisplayText("MISS");
                 gui.repaint();
             }
         }
@@ -603,16 +935,39 @@ public class BattleshipObject extends JFrame
             switch(x)
             {
                 case 1:
-                System.out.println("Out of bounds.");
+                System.out.println("Place already taken.");
                 break;
                 case 2:
-                System.out.println("Place already taken.");
+                System.out.println("Out of bounds.");
                 break;
                 case 3:
                 System.out.println("Wrong input");
                 break;
             }
         }
+    }
+    public static int input(String input)
+    {
+        boolean passed = false;
+        Scanner scan = new Scanner(System.in);
+        while(passed == false)
+        {
+            try
+            {
+                Integer.parseInt(input);
+                passed = true;
+            }
+            catch(NumberFormatException e)
+            {
+                passed = false;
+            }
+            if(passed == false)
+            {
+                System.out.println("Wrong input. Please try again.");
+                input = scan.next();
+            }
+        }
+        return Integer.parseInt(input);
     }
     public void paint(Graphics g)
     {
@@ -671,21 +1026,36 @@ public class BattleshipObject extends JFrame
                 g.fillRect(interfEnemy[i][j].getX(), interfEnemy[i][j].getY(), interfEnemy[i][j].getWidth(), interfEnemy[i][j].getHeight());
                 g.setColor(black);
                 g.drawRect(interfEnemy[i][j].getX(), interfEnemy[i][j].getY(), interfEnemy[i][j].getWidth(), interfEnemy[i][j].getHeight());
+                if(interfPlayer[i][j].getDisplayText().equalsIgnoreCase("") || interfEnemy[i][j].getDisplayText().equalsIgnoreCase(""))
+                {
+                    if(interfPlayer[i][j].getDisplayText().equalsIgnoreCase(""))
+                    {
+                        g.setColor(black);
+                        g.drawLine(interfPlayer[i][j].getX(), interfPlayer[i][j].getY(), interfPlayer[i][j].getX()+interfPlayer[i][j].getWidth(), interfPlayer[i][j].getY()+interfPlayer[i][j].getHeight());
+                        g.drawLine(interfPlayer[i][j].getX()+interfPlayer[i][j].getWidth(), interfPlayer[i][j].getY(), interfPlayer[i][j].getX(), interfPlayer[i][j].getY()+interfPlayer[i][j].getHeight());
+                    }
+                    else
+                    {
+                        g.setColor(black);
+                        g.drawLine(interfEnemy[i][j].getX(), interfEnemy[i][j].getY(), interfEnemy[i][j].getX()+interfEnemy[i][j].getWidth(), interfEnemy[i][j].getY()+interfEnemy[i][j].getHeight());
+                        g.drawLine(interfEnemy[i][j].getX()+interfEnemy[i][j].getWidth(), interfEnemy[i][j].getY(), interfEnemy[i][j].getX(), interfEnemy[i][j].getY()+interfEnemy[i][j].getHeight());
+                    }
+                }
                 if(interfPlayer[i][j].getShipPresent() == true)
                 {
-                    g.drawString(interfPlayer[i][j].getTypeOfShip(), interfPlayer[i][j].getX()+5, interfPlayer[i][j].getY()+25);
+                    g.drawString(interfPlayer[i][j].getDisplayText(), interfPlayer[i][j].getX()+5, interfPlayer[i][j].getY()+25);
                 }
                 else
                 {
-                    g.drawString(interfPlayer[i][j].getId()+"",interfPlayer[i][j].getX()+15,interfPlayer[i][j].getY()+15);
+                    g.drawString(interfPlayer[i][j].getDisplayText(),interfPlayer[i][j].getX()+15,interfPlayer[i][j].getY()+15);
                 }
                 if(interfEnemy[i][j].getShipPresent() == true)
                 {
-                    g.drawString(interfEnemy[i][j].getId() + "",interfEnemy[i][j].getX()+15, interfEnemy[i][j].getY()+15);
+                    g.drawString(interfEnemy[i][j].getDisplayText()+ "",interfEnemy[i][j].getX()+15, interfEnemy[i][j].getY()+15);
                 }
                 else
                 {
-                    g.drawString(interfEnemy[i][j].getTypeOfShip(),interfEnemy[i][j].getX()+5, interfEnemy[i][j].getY()+25);
+                    g.drawString(interfEnemy[i][j].getDisplayText(),interfEnemy[i][j].getX()+5, interfEnemy[i][j].getY()+25);
                 }
             }
         }
@@ -700,12 +1070,20 @@ class showShips
     int y = 0;
     final int width = 50;
     final int height = 50;
-    int id = 0;
     int r = 133;
     int g = 218;
     int b = 255;
     boolean shipPresent = false;
-    String typeOfShip = "";
+    String DisplayText = "";
+    String typeOfShip = "0";
+    void setTypeOfShip(String typeOfShip)
+    {
+        this.typeOfShip = typeOfShip;
+    }
+    String getTypeOfShip()
+    {
+        return typeOfShip;
+    }
     boolean getHasWon()
     {
         return hasWon;
@@ -722,13 +1100,13 @@ class showShips
     {
         this.shipPresent = shipPresent;
     }
-    void setTypeOfShip(String typeOfShip)
+    void setDisplayText(String DisplayText)
     {
-        this.typeOfShip = typeOfShip;
+        this.DisplayText = DisplayText;
     }
-    String getTypeOfShip()
+    String getDisplayText()
     {
-        return typeOfShip;
+        return DisplayText;
     }
     void setRGB(int r, int g, int b)
     {
@@ -772,14 +1150,6 @@ class showShips
     {
         return width;
     }
-    void setId(int id)
-    {
-        this.id = id;
-    }
-    int getId()
-    {
-        return id;
-    }
 }
 class players
 {
@@ -795,6 +1165,37 @@ class players
     int[][] field = new int[10][10];
     int counter = 0;
     boolean isDone = false;
+    int[] shipHp = new int[6];
+    boolean cPlaced = false;
+    boolean getCPlaced()
+    {
+        return cPlaced;
+    }
+    void setCPlaced(boolean cPlaced)
+    {
+        this.cPlaced = cPlaced;
+    }
+    void setShipHp(int index, int value)
+    {
+        shipHp[index] = value;
+    }
+    void decrementShipHp(int index)
+    {
+        shipHp[index]--;
+    }
+    int getShipHp(int index)
+    {
+        return shipHp[index];
+    }
+    void initializeShipHp()
+    {
+        shipHp[0] = 0;
+        shipHp[5] = 5;
+        shipHp[4] = 4;
+        shipHp[3] = 3;
+        shipHp[2] = 3;
+        shipHp[1] = 2;
+    }
     void setShoot(int shoot)
     {
         this.shoot = shoot;
