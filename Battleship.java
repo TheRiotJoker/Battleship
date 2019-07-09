@@ -64,7 +64,7 @@ public class Battleship extends JFrame
         }
         x = 0;
         y = 0;
-        BattleshipObject gui = new BattleshipObject();
+        Battleship gui = new Battleship();
         gui.setSize(1200,600);
         gui.setVisible(true);
         gui.setResizable(false);
