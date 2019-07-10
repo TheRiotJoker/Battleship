@@ -9,6 +9,10 @@ import java.awt.*;
 import javax.swing.*;
 public class Battleship extends JFrame
 {
+    public static final int width = 1200;
+    public static final int height = 600;
+    Image doubleBufferImg;
+	Graphics doubleBufferGraphics;
     private static final long serialVersionUID = 1L;
     public static showShips[][] interfPlayer = new showShips[10][10];
     public static showShips[][] interfEnemy = new showShips[10][10];
@@ -65,7 +69,7 @@ public class Battleship extends JFrame
         x = 0;
         y = 0;
         Battleship gui = new Battleship();
-        gui.setSize(1200,600);
+        gui.setSize(width,height);
         gui.setVisible(true);
         gui.setResizable(false);
         gui.setTitle("Battleship");
@@ -467,7 +471,7 @@ public class Battleship extends JFrame
                                             interfEnemy[y][x].setTypeOfShip("C3");
                                             interfEnemy[y+1][x].setTypeOfShip("C3");
                                             interfEnemy[y+2][x].setTypeOfShip("C3");
-                                            player[1].setCPlaced(true);
+                                            player[main].setCPlaced(true);
                                         }
                                         else
                                         {
@@ -489,7 +493,7 @@ public class Battleship extends JFrame
                                             interfPlayer[y][x].setTypeOfShip("C3");
                                             interfPlayer[y+1][x].setTypeOfShip("C3");
                                             interfPlayer[y+2][x].setTypeOfShip("C3");
-                                            player[0].setCPlaced(true);
+                                            player[main].setCPlaced(true);
                                         }
                                         else
                                         {
@@ -973,7 +977,7 @@ public class Battleship extends JFrame
         }
         return Integer.parseInt(input);
     }
-    public void paint(Graphics g)
+    public void paintComponent(Graphics g)
     {
         Color background = new Color(169,169,169);
         Color fieldColor = new Color(0,0,0);
@@ -1040,9 +1044,12 @@ public class Battleship extends JFrame
                     }
                     else
                     {
-                        g.setColor(black);
-                        g.drawLine(interfEnemy[i][j].getX(), interfEnemy[i][j].getY(), interfEnemy[i][j].getX()+interfEnemy[i][j].getWidth(), interfEnemy[i][j].getY()+interfEnemy[i][j].getHeight());
-                        g.drawLine(interfEnemy[i][j].getX()+interfEnemy[i][j].getWidth(), interfEnemy[i][j].getY(), interfEnemy[i][j].getX(), interfEnemy[i][j].getY()+interfEnemy[i][j].getHeight());
+                        if(interfEnemy[i][j].getDisplayText().equalsIgnoreCase(""));
+                        {
+                            g.setColor(black);
+                            g.drawLine(interfEnemy[i][j].getX(), interfEnemy[i][j].getY(), interfEnemy[i][j].getX()+interfEnemy[i][j].getWidth(), interfEnemy[i][j].getY()+interfEnemy[i][j].getHeight());
+                            g.drawLine(interfEnemy[i][j].getX()+interfEnemy[i][j].getWidth(), interfEnemy[i][j].getY(), interfEnemy[i][j].getX(), interfEnemy[i][j].getY()+interfEnemy[i][j].getHeight());
+                        }
                     }
                 }
                 if(interfPlayer[i][j].getShipPresent() == true)
@@ -1063,6 +1070,13 @@ public class Battleship extends JFrame
                 }
             }
         }
+    }
+    public void paint(Graphics g)
+    {
+        doubleBufferImg = createImage(width, height);
+		doubleBufferGraphics = doubleBufferImg.getGraphics();
+		paintComponent(doubleBufferGraphics);
+		g.drawImage(doubleBufferImg,0,0,this);
     }
 }
 class showShips
