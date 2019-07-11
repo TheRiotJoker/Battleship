@@ -24,7 +24,7 @@ public class Battleship extends JFrame
         int y = 50;
         int counter = 0;
         players[] player = new players[2];
-        for(int i = 0; i < player.length; i++)
+        for(int i = 0; i < player.length; i++) //loop setting up object's variables
         {
             player[i] = new players();
             player[i].initShipsToPlace();
@@ -34,7 +34,7 @@ public class Battleship extends JFrame
         }
         for(int i = 0; i < interfPlayer.length; i++)
         {
-            for(int j = 0; j < interfPlayer[i].length; j++)
+            for(int j = 0; j < interfPlayer[i].length; j++) //loop setting up player's visual grid
             {
                 interfPlayer[i][j] = new showShips();
                 interfPlayer[i][j].setDisplayText(""+counter);
@@ -52,7 +52,7 @@ public class Battleship extends JFrame
         x = 600;
         for(int i = 0; i < interfEnemy.length; i++)
         {
-            for(int j = 0; j < interfEnemy[i].length; j++)
+            for(int j = 0; j < interfEnemy[i].length; j++) //loop setting up cpu's visual grid
             {
                 interfEnemy[i][j] = new showShips();
                 interfEnemy[i][j].setDisplayText(""+counter);
@@ -68,7 +68,7 @@ public class Battleship extends JFrame
         }
         x = 0;
         y = 0;
-        Battleship gui = new Battleship();
+        Battleship gui = new Battleship(); //======== setting up the window ========
         gui.setSize(width,height);
         gui.setVisible(true);
         gui.setResizable(false);
@@ -629,9 +629,9 @@ public class Battleship extends JFrame
                     break;
                 }
             }
-        }
+        } //end of main placing loop. 
         System.out.println("Phase 1 complete.");
-        while(player[0].getPiecesAlive() > 0 || player[1].getPiecesAlive() > 0)
+        while(player[0].getPiecesAlive() > 0 || player[1].getPiecesAlive() > 0) //main game loop
         {
             System.out.println("///////////////////////////////////////////////////////");
             System.out.println("///////////////////CPU BOARD//////////////////////////");
@@ -676,7 +676,7 @@ public class Battleship extends JFrame
                 player[1].setPlayingField(y, x, "HIT");
                 interfEnemy[y][x].setRGB(255,100,120);
                 interfEnemy[y][x].setDisplayText("HIT");
-                switch(player[1].getField()[y][x])
+                switch(player[1].getField()[y][x]) //switch case checking which ship has been hit.
                 {
                     case 55555:
                     player[1].decrementShipHp(5);
@@ -791,7 +791,7 @@ public class Battleship extends JFrame
                 y = convert(player[1].getShoot())[0];
                 x = convert(player[1].getShoot())[1];
             }while(player[0].getPlayingField()[y][x].equalsIgnoreCase("HIT") || player[0].getPlayingField()[y][x].equalsIgnoreCase("Miss"));
-            if(player[0].getField()[y][x] > 0)
+            if(player[0].getField()[y][x] > 0) //switch case checking which ship has been hit.
             {
                 System.out.println("We've been hit!");
                 player[0].setPiecesAlive(player[0].getPiecesAlive()-1);
@@ -917,7 +917,7 @@ public class Battleship extends JFrame
         gui.repaint();
         scan.close();
     }
-    public static int[] convert(int input)
+    public static int[] convert(int input) //Method to convert user's input from a double digit to two single digits for the two dimensional array
     {
         int[] change = new int[2];
         change[0] = 0;
@@ -936,7 +936,7 @@ public class Battleship extends JFrame
         }
         return change;
     }
-    static void errorMsg(int x, int on)
+    static void errorMsg(int x, int on) //if input is wrong, the user is let know what he input that is wrong | the on variable makes sure that only the player gets an error message
     {
         if(on == 0)
         {
@@ -954,7 +954,7 @@ public class Battleship extends JFrame
             }
         }
     }
-    public static int input(String input)
+    public static int input(String input) //input that makes sure that the NumberFormatException doesn't pop up -> foolproofing
     {
         boolean passed = false;
         Scanner scan = new Scanner(System.in);
